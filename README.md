@@ -14,7 +14,7 @@ Module Input Variables
 - `route_table_ids` - (optional) A comma separated list of route tables ids. This must be provided if you plan to create static routes for the destination_cidr_blocks in each route table.
 - `route_table_count` - (optional) The total number of tables in the route_table_ids list. This must be provided if route_table_ids is set. This is necessary since value of `count` cannot be computed in modules.
 - `static_routes_only` - Determines whether routes learned from BGP will be propagated to route tables. If set to true, you must have vgw route propagation enabled on route tables, and of course you must be running BGP. Accepts true or false.
-- `add_static_routes_to_tables` - Determines whether static routes will be added to all route tables in route_table_ids list or if vgw route propagation will be used instead. If set to true, then route_table_ids, route_table_count, and destination_cidr_blocks must also be provided.
+- `add_static_routes_to_tables` - Determines whether static routes will be added to all route tables in route_table_ids list or if vgw route propagation will be used instead. If set to "true", then route_table_ids, route_table_count, and destination_cidr_blocks must also be provided.
 
 Usage 
 -----
@@ -55,7 +55,7 @@ module "stockholm_cgw" {
   bgp_asn            = "65000"
   static_routes_only = true
 
-  add_static_routes_to_tables  = true
+  add_static_routes_to_tables  = "true"
   route_table_ids              = "${concat(module.public_subnet.public_route_table_ids, module.private_subnet.private_route_table_ids)}"
   route_table_count            = 6
   destination_cidr_blocks      = ["10.1.1.0/24", "10.100.1.0/24"]
