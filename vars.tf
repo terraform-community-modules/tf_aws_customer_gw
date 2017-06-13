@@ -4,6 +4,12 @@ variable "name" {
 
 variable "vpn_gateway_id" {
   description = "Specify which VPN Gateway the Customer Gateway will be associated with."
+  default = ""
+}
+
+
+variable "customer_gateway_id" {
+  description = "Specify which Customer Gateway to use. If specified the variables ip_address and bgp_asn will not be used"
 }
 
 variable "ip_address" {

@@ -1,4 +1,5 @@
 resource "aws_customer_gateway" "default" {
+  count      = "${var.customer_gateway_id == "" ? 1 : 0}"
   bgp_asn    = "${var.bgp_asn}"
   ip_address = "${var.ip_address}"
   type       = "ipsec.1"
@@ -14,7 +15,7 @@ resource "aws_customer_gateway" "default" {
 
 resource "aws_vpn_connection" "default" {
   vpn_gateway_id      = "${var.vpn_gateway_id}"
-  customer_gateway_id = "${aws_customer_gateway.default.id}"
+  customer_gateway_id = "${var.customer_gateway_id == "" ? aws_customer_gateway.default.id : var.customer_gateway_id}"
   type                = "ipsec.1"
   static_routes_only  = "${var.static_routes_only}"
 
