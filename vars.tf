@@ -4,20 +4,22 @@ variable "name" {
 
 variable "vpn_gateway_id" {
   description = "Specify which VPN Gateway the Customer Gateway will be associated with."
-  default = ""
 }
 
 
 variable "customer_gateway_id" {
   description = "Specify which Customer Gateway to use. If specified the variables ip_address and bgp_asn will not be used"
+  default = ""
 }
 
 variable "ip_address" {
   description = "IP address of the Customer Gateway external interface."
+  default = ""
 }
 
 variable "bgp_asn" {
   description = "BGP ASN of the Customer Gateway. By convention, use 65000 if you are not running BGP."
+  default = ""
 }
 
 variable "destination_cidr_blocks" {
