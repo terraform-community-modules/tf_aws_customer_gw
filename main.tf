@@ -1,5 +1,4 @@
 resource "aws_customer_gateway" "default" {
-  count      = "${var.customer_gateway_id == "" ? 1 : 0}"
   bgp_asn    = "${var.bgp_asn}"
   ip_address = "${var.ip_address}"
   type       = "ipsec.1"
@@ -14,23 +13,6 @@ resource "aws_customer_gateway" "default" {
 }
 
 resource "aws_vpn_connection" "default" {
-  count      = "${var.customer_gateway_id == "" ? 1 : 0}"
-  vpn_gateway_id      = "${var.vpn_gateway_id}"
-  customer_gateway_id = "${aws_customer_gateway.default.id}"
-  type                = "ipsec.1"
-  static_routes_only  = "${var.static_routes_only}"
-
-  tags {
-    Name = "${var.name}"
-  }
-
-  lifecycle {
-    create_before_destroy = true
-  }
-}
-
-resource "aws_vpn_connection" "default" {
-  count      = "${var.customer_gateway_id == "" ? 0 : 1}"
   vpn_gateway_id      = "${var.vpn_gateway_id}"
   customer_gateway_id = "${aws_customer_gateway.default.id}"
   type                = "ipsec.1"
