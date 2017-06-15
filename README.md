@@ -8,8 +8,11 @@ Module Input Variables
 
 - `name`   - Unique name used to label the VPN Gateway and Customer Gateway.
 - `vpn_gateway_id` - VPN Gateway to associate with Customer Gateway and VPN Connection.
-- `ip_address` - The IP address of the gateway's Internet-routable external interface.
-- `bgp_asn` - BGP Autonomous System Number. If BGP is not in use, then by convention set this value to 65000.
+-  Customer Gateway (CGW): you can use an existing CGW or you can create a new CGW
+   - To use existing CGW: pass the CGW ID in `customer_gateway_id`. In this case `ip_address` and `bagp_asn` are not relevant and not used
+   - To create a new CGW: leave `customer_gateway_id` as "", and specify 2 variables below:
+     - `ip_address` - The IP address of the gateway's Internet-routable external interface.
+     - `bgp_asn` - BGP Autonomous System Number. If BGP is not in use, then by convention set this value to 65000.
 - `destination_cidr_blocks` - A comma separated list of CIDR blocks which sit behind the Customer Gateway device and should be routed over the VPN connection.
 - `route_table_ids` - (optional) A comma separated list of route tables ids. This must be provided if you plan to create static routes for the destination_cidr_blocks in each route table.
 - `route_table_count` - (optional) The total number of tables in the route_table_ids list. This must be provided if route_table_ids is set. This is necessary since value of `count` cannot be computed in modules.
