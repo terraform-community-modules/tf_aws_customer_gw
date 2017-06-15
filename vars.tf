@@ -18,7 +18,7 @@ variable "ip_address" {
 
 variable "bgp_asn" {
   description = "BGP ASN of the Customer Gateway. By convention, use 65000 if you are not running BGP. Not used if customer_gateway_id is specified"
-  default = 0
+  default = 65000
 }
 
 variable "destination_cidr_blocks" {
