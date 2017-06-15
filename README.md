@@ -64,6 +64,23 @@ module "stockholm_cgw" {
   destination_cidr_blocks      = ["10.1.1.0/24", "10.100.1.0/24"]
 }
 
+# Or if you want to use existing CGW...
+/*
+module "stockholm_cgw" {
+  source = "github.com/terraform-community-modules/tf_aws_customer_gw"
+
+  name = "stockholm"
+
+  vpn_gateway_id      = "${module.vpn.vgw_id}"
+  customer_gateway_id = "<pass the CGW ID e.g. from a data block>"
+  static_routes_only = true
+
+  add_static_routes_to_tables  = true
+  route_table_ids              = "${concat(module.public_subnet.public_route_table_ids, module.private_subnet.private_route_table_ids)}"
+  route_table_count            = 6
+  destination_cidr_blocks      = ["10.1.1.0/24", "10.100.1.0/24"]
+}
+*/
 
 
 ```
